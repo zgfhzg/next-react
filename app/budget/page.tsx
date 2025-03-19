@@ -1,17 +1,10 @@
 'use client'
-import Table from "../../components/table";
-import {Column} from "react-table";
 import React, {useEffect, useState} from "react";
 import {format} from "date-fns";
 import Dialog from "../../components/dialog";
 import {Button} from "@/components/ui/button";
-
-interface Data {    // 데이터 구조체
-    name: string;
-    price: number;
-    payDate: string;
-    payer: string;
-}
+import {columns, Data} from "@/app/budget/columns";
+import {DataTable} from "@/app/budget/data-table";
 
 export default function Budget() {
     const [data, setRows] = useState<Data[]>([]);
@@ -20,13 +13,6 @@ export default function Budget() {
         const res = await fetch('/budgets');
         return await res.json();
     }
-    
-    const columns: Column<Data>[] = [
-        { Header: '항목', accessor: 'name' },
-        { Header: '금액', accessor: 'price' },
-        { Header: '날짜', accessor: 'payDate' },
-        { Header: '결제자', accessor: 'payer' },
-    ];
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const openDialog = () => setIsDialogOpen(true);
@@ -87,7 +73,7 @@ export default function Budget() {
                     <Dialog isOpen={isDialogOpen} onClose={closeDialog} onSubmit={addRow} title={"경비 사용 내역"} elements={elements}/>
                     <Button onClick={save} className={"right"}>저장</Button>
                 </div>
-                <Table tableId="budgetTable" columns={columns} data={data} totalPrice={totalPrice} isTfoot={true}/>
+                <DataTable columns={columns} data={data} />
             </div>
         </div>
     )
