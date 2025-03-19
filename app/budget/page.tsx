@@ -4,6 +4,7 @@ import {Column} from "react-table";
 import React, {useEffect, useState} from "react";
 import {format} from "date-fns";
 import Dialog from "../../components/dialog";
+import {Button} from "@/components/ui/button";
 
 interface Data {    // 데이터 구조체
     name: string;
@@ -16,7 +17,7 @@ export default function Budget() {
     const [data, setRows] = useState<Data[]>([]);
 
     async function fetchData() {
-        const res = await fetch('https://api.example.com/data');
+        const res = await fetch('/budgets');
         return await res.json();
     }
     
@@ -82,9 +83,9 @@ export default function Budget() {
             <div className="inner">
                 <h1 id="pageTitle" className="subtitle">결혼 예산 사용 내역</h1>
                 <div>
-                    <div className="button left plus" onClick={openDialog}>추가</div>
+                    <Button onClick={openDialog}>추가</Button>
                     <Dialog isOpen={isDialogOpen} onClose={closeDialog} onSubmit={addRow} title={"경비 사용 내역"} elements={elements}/>
-                    <div className="button right" onClick={save}>저장</div>
+                    <Button onClick={save} className={"right"}>저장</Button>
                 </div>
                 <Table tableId="budgetTable" columns={columns} data={data} totalPrice={totalPrice} isTfoot={true}/>
             </div>
