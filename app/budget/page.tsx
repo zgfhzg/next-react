@@ -1,7 +1,5 @@
 'use client'
 import React, {useEffect, useState} from "react";
-import {format} from "date-fns";
-import Dialog from "../../components/dialog";
 import {Button} from "@/components/ui/button";
 import {columns, Data} from "@/app/budget/columns";
 import {DataTable} from "@/app/budget/data-table";
@@ -10,34 +8,21 @@ export default function Budget() {
     const [data, setRows] = useState<Data[]>([]);
 
     async function fetchData() {
-        const res = await fetch('/budgets');
+        const res = await fetch('/api/budgets');
         return await res.json();
     }
 
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const openDialog = () => setIsDialogOpen(true);
-    const closeDialog = () => setIsDialogOpen(false);
+    // const elements = [
+    //     { type: 'text', name: 'title', placeholder: '항목' },
+    //     { type: 'number', name: 'amount', placeholder: '가격' },
+    //     { type: 'date', name: 'date', placeholder: '날짜', className: 'wid100' },
+    //     { type: 'checkbox', name: 'name', title: '결제자', options: ['A', 'B'] },
+    // ];
 
-    const elements = [
-        { type: 'text', name: 'title', placeholder: '항목' },
-        { type: 'number', name: 'amount', placeholder: '가격' },
-        { type: 'date', name: 'date', placeholder: '날짜', className: 'wid100' },
-        { type: 'checkbox', name: 'name', title: '결제자', options: ['A', 'B'] },
-    ];
-
-    const totalPrice = data.reduce((sum, row) => sum + row.price, 0);
-    const addRow = (subData: Record<string, any>) => {
-        const newData: Data = {
-            name: subData.name,
-            price: Number(subData.price),
-            payDate: format(subData.payDate, 'yy/MM/dd'),
-            payer: subData.payer,
-        }
-        setRows([...data, newData]);
-    }
+    // const totalPrice = data.reduce((sum, row) => sum + row.price, 0);
 
     function save() {
-        fetch('/api/save', {
+        fetch('/api/budget/save', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,7 +46,7 @@ export default function Budget() {
     }
 
     useEffect(() => {
-        fetchData().then(res => setRows(res));
+        fetchData().then(res => setRows(res._embedded.budgets));
     }, []);
 
     return (
@@ -69,8 +54,8 @@ export default function Budget() {
             <div className="inner">
                 <h1 id="pageTitle" className="subtitle">결혼 예산 사용 내역</h1>
                 <div>
-                    <Button onClick={openDialog}>추가</Button>
-                    <Dialog isOpen={isDialogOpen} onClose={closeDialog} onSubmit={addRow} title={"경비 사용 내역"} elements={elements}/>
+                    <Button>추가</Button>
+                    {/*<Dialog isOpen={isDialogOpen} onClose={closeDialog} title={"경비 사용 내역"} elements={elements}/>*/}
                     <Button onClick={save} className={"right"}>저장</Button>
                 </div>
                 <DataTable columns={columns} data={data} />
