@@ -10,7 +10,7 @@ import {
 import {
     Table,
     TableBody,
-    TableCell,
+    TableCell, TableFooter,
     TableHead,
     TableHeader,
     TableRow,
@@ -21,15 +21,8 @@ interface DataTableProps<TData, TValue> {
     data: TData[]
 }
 
-export function DataTable<TData, TValue>({
-                                             columns,
-                                             data,
-                                         }: DataTableProps<TData, TValue>) {
-    const table = useReactTable({
-        data,
-        columns,
-        getCoreRowModel: getCoreRowModel(),
-    })
+export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, TValue>) {
+    const table = useReactTable({data,columns,getCoreRowModel: getCoreRowModel()})
 
     return (
         <div className="rounded-md border">
@@ -55,10 +48,7 @@ export function DataTable<TData, TValue>({
                 <TableBody>
                     {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
-                            <TableRow
-                                key={row.id}
-                                data-state={row.getIsSelected() && "selected"}
-                            >
+                            <TableRow key={row.id}>
                                 {row.getVisibleCells().map((cell) => (
                                     <TableCell key={cell.id}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -74,6 +64,12 @@ export function DataTable<TData, TValue>({
                         </TableRow>
                     )}
                 </TableBody>
+                <TableFooter>
+                    <TableRow>
+                        <TableCell colSpan={3}>Total</TableCell>
+                        <TableCell className="text-right">800000</TableCell>
+                    </TableRow>
+                </TableFooter>
             </Table>
         </div>
     )
