@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Button} from "@/components/ui/button";
 import {columns, Data} from "@/app/budget/columns";
 import {DataTable} from "@/app/budget/data-table";
+import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
 
 export default function Budget() {
     const [data, setRows] = useState<Data[]>([]);
@@ -54,8 +55,20 @@ export default function Budget() {
             <div className="inner">
                 <h1 id="pageTitle" className="subtitle">결혼 예산 사용 내역</h1>
                 <div style={{margin: "0 0 1em 0"}}>
-                    <Button className={"bg-gray-200 hover:bg-gray-500 text-white"}>추가</Button>
-                    {/*<Dialog isOpen={isDialogOpen} onClose={closeDialog} title={"경비 사용 내역"} elements={elements}/>*/}
+                    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                        <DialogTrigger asChild>
+                            <Button className={"bg-gray-200 hover:bg-gray-500 text-white"}>추가</Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>경비 사용 내역</DialogTitle>
+                            </DialogHeader>
+                            <div className="space-y-4">
+                                {/* 여기에 폼 요소들 추가 */}
+                                <p>폼이 여기에 들어갑니다.</p>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
                     <Button onClick={save} className={"bg-gray-200 hover:bg-gray-500 text-white right"}>저장</Button>
                 </div>
                 <DataTable columns={columns} data={data} />
