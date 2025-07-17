@@ -54,9 +54,9 @@ export default function Budget() {
             <div className="inner">
                 <h1 id="pageTitle" className="subtitle">결혼 예산 사용 내역</h1>
                 <div>
-                    <Button>추가</Button>
+                    <Button className={"bg-gray-200 hover:bg-gray-500 text-white"}>추가</Button>
                     {/*<Dialog isOpen={isDialogOpen} onClose={closeDialog} title={"경비 사용 내역"} elements={elements}/>*/}
-                    <Button onClick={save} className={"right"}>저장</Button>
+                    <Button onClick={save} className={"bg-gray-200 hover:bg-gray-500 text-white right"}>저장</Button>
                 </div>
                 <DataTable columns={columns} data={data} />
             </div>
