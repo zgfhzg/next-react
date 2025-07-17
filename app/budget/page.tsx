@@ -59,13 +59,39 @@ export default function Budget() {
                         <DialogTrigger asChild>
                             <Button className={"bg-gray-200 hover:bg-gray-500 text-white"}>추가</Button>
                         </DialogTrigger>
-                        <DialogContent>
+                        <DialogContent className="max-w-xs w-full p-4">
                             <DialogHeader>
-                                <DialogTitle>경비 사용 내역</DialogTitle>
+                                <DialogTitle>경비 사용 내역 추가</DialogTitle>
                             </DialogHeader>
                             <div className="space-y-4">
-                                {/* 여기에 폼 요소들 추가 */}
-                                <p>폼이 여기에 들어갑니다.</p>
+                                <form className="grid grid-cols-2 gap-4">
+                                    <input type="text" name="name" placeholder="항목" className="border p-2 rounded" />
+                                    <input type="number" name="price" placeholder="가격" className="border p-2 rounded" />
+                                    <input type="date" name="date" placeholder="날짜" className="border p-2 rounded" />
+                                    <select name="payer" className="border p-2 rounded">
+                                        <option value="">결제자 선택</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                    </select>
+                                </form>
+                                <Button
+                                    className="col-span-2 bg-gray-300 text-white"
+                                    onClick={() => {
+                                        const form = document.querySelector('form');
+                                        if (!form) return;
+                                        const formData = new FormData(form as HTMLFormElement);
+                                        const newRow = {
+                                            name: formData.get('name') as string,
+                                            price: Number(formData.get('price')),
+                                            date: formData.get('date') as string,
+                                            payer: formData.get('payer') as string,
+                                        };
+                                        setRows(prev => [...prev, newRow]);
+                                        setIsDialogOpen(false);
+                                    }}
+                                >
+                                    저장
+                                </Button>
                             </div>
                         </DialogContent>
                     </Dialog>
