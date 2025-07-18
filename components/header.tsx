@@ -5,7 +5,15 @@ import React from "react";
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = React.useState(false);
-    
+
+    const toggleMenu = () => {
+        setMenuOpen(prevState => !prevState);
+    };
+
+    const closeMenu = () => {
+        setMenuOpen(false);
+    };
+
     return (
         <>
             <header id="header">
@@ -13,7 +21,7 @@ export default function Header() {
                     {/* Logo */}
                     <div className="logo">
                         <span className="symbol">
-                            <Image src="/images/logo.svg" alt="" width="30" height="30" />
+                            <Image src="/images/logo.svg" alt="" width="30" height="30"/>
                         </span>
                         <span className="title">Personal Blog</span>
                     </div>
@@ -21,13 +29,13 @@ export default function Header() {
                     <nav className={menuOpen ? "menuOpen" : ""}>
                         <ul>
                             <li>
-                                <a href="#menu" onClick={() => setMenuOpen(prevState => !prevState)}>Menu</a>
+                                <button type="button" onClick={toggleMenu} aria-label={menuOpen ? "메뉴 닫기" : "메뉴 열기"} aria-expanded={menuOpen} className={`hamburger-menu ${menuOpen ? 'active' : ''}`} />
                             </li>
                         </ul>
                     </nav>
                 </div>
             </header>
-            <NavigationBar navClose={() => setMenuOpen(false)}/>
+            <NavigationBar isOpen={menuOpen} navClose={closeMenu}/>
         </>
     )
 }
