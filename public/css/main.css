@@ -2464,7 +2464,7 @@ button,
     border-radius: 4px;
     border: 0;
     box-shadow: inset 0 0 0 2px #585858;
-    color: #585858 !important;
+    /*color: #585858 !important;*/
     cursor: pointer;
     display: inline-block;
     font-size: 0.8em;
@@ -2497,14 +2497,14 @@ button.fit,
     width: 100%;
 }
 
-input[type="submit"]:hover,
-input[type="reset"]:hover,
-input[type="button"]:hover,
-button:hover,
-.button:hover {
-    color: #f2849e !important;
-    box-shadow: inset 0 0 0 2px #f2849e;
-}
+/*input[type="submit"]:hover,*/
+/*input[type="reset"]:hover,*/
+/*input[type="button"]:hover,*/
+/*button:hover,*/
+/*.button:hover {*/
+/*    color: #f2849e !important;*/
+/*    box-shadow: inset 0 0 0 2px #f2849e;*/
+/*}*/
 
 input[type="submit"]:active,
 input[type="reset"]:active,
@@ -2897,7 +2897,7 @@ body.is-touch .tiles article .content {
     padding: 0;
 }
 
-#header nav ul li a {
+#header nav ul li button {
     display: block;
     position: relative;
     height: 3em;
@@ -2912,7 +2912,7 @@ body.is-touch .tiles article .content {
     text-transform: uppercase;
 }
 
-#header nav ul li a[href="#menu"] {
+#header nav ul li button {
     -webkit-tap-highlight-color: transparent;
     width: 4em;
     text-indent: 4em;
@@ -2922,7 +2922,7 @@ body.is-touch .tiles article .content {
     white-space: nowrap;
 }
 
-#header nav ul li a[href="#menu"]:before, #header nav ul li a[href="#menu"]:after {
+#header nav ul li button:before, #header nav ul li button:after {
     -moz-transition: opacity 0.2s ease;
     -webkit-transition: opacity 0.2s ease;
     -ms-transition: opacity 0.2s ease;
@@ -2939,21 +2939,21 @@ body.is-touch .tiles article .content {
     background-size: 2em 2em;
 }
 
-#header nav ul li a[href="#menu"]:before {
+#header nav ul li button:before {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 8px%3B stroke: %23f2849e%3B %7D%3C/style%3E%3Cline x1='0' y1='25' x2='100' y2='25' /%3E%3Cline x1='0' y1='50' x2='100' y2='50' /%3E%3Cline x1='0' y1='75' x2='100' y2='75' /%3E%3C/svg%3E");
     opacity: 0;
 }
 
-#header nav ul li a[href="#menu"]:after {
+#header nav ul li button:after {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 8px%3B stroke: %23585858%3B %7D%3C/style%3E%3Cline x1='0' y1='25' x2='100' y2='25' /%3E%3Cline x1='0' y1='50' x2='100' y2='50' /%3E%3Cline x1='0' y1='75' x2='100' y2='75' /%3E%3C/svg%3E");
     opacity: 1;
 }
 
-#header nav ul li a[href="#menu"]:hover:before {
+#header nav ul li button:hover:before {
     opacity: 1;
 }
 
-#header nav ul li a[href="#menu"]:hover:after {
+#header nav ul li button:hover:after {
     opacity: 0;
 }
 
@@ -2968,7 +2968,7 @@ body.is-touch .tiles article .content {
         top: 0.5em;
     }
 
-    #header nav ul li a[href="#menu"]:before, #header nav ul li a[href="#menu"]:after {
+    #header nav ul li button:before, #header nav ul li button:after {
         background-size: 1.5em 1.5em;
     }
 
@@ -3021,6 +3021,13 @@ body.is-touch .tiles article .content {
     padding: 2.75em;
     opacity: 0;
     overflow-y: auto;
+}
+
+#menu > .inner > button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: white;
 }
 
 #menu > .inner > ul {
@@ -3086,6 +3093,7 @@ body.is-touch .tiles article .content {
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: 2em 2em;
     background-size: 2em 2em;
 }
 
