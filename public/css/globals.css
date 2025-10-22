@@ -134,6 +134,7 @@ code {
 
 #main {
   margin: 5% 1%;
+  padding-top: 6rem;
 }
 
 #menuTitle {
@@ -156,4 +157,3 @@ code {
 .right {
   float: right;
 }
-
